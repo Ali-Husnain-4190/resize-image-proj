@@ -40,11 +40,28 @@ resource "aws_lambda_function" "test_lambda" {
   filename      =  data.archive_file.lambda.output_path
   function_name = "resize-image"
   role          = aws_iam_role.iam_for_lambda.arn
-  handler       =  "share-ami.lambda_handler"
+  handler       =  "resize-image.lambda_handler"
 
   source_code_hash = data.archive_file.lambda.output_base64sha256
 
   runtime = "python3.10"
+  layers = ["arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p310-Pillow:6"]
+
 
 }
 
+resource "aws_s3_bucket_notification" "aws-lambda-trigger" {
+  bucket = aws_s3_bucket.s3_bucket_1.id
+  lambda_function {
+    lambda_function_arn = aws_lambda_function.test_lambda.arn
+    events              = ["s3:ObjectCreated:*", "s3:ObjectRemoved:*"]
+
+  }
+}
+resource "aws_lambda_permission" "aws_invoke_lambda" {
+  statement_id  = "AllowS3Invoke"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.test_lambda.function_name
+  principal     = "s3.amazonaws.com"
+  source_arn    = "arn:aws:s3:::${aws_s3_bucket.s3_bucket_1.id}"
+}

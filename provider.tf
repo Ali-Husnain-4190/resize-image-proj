@@ -17,7 +17,7 @@ provider "aws" {
 }
 
 
-#  set AWS_ACCESS_KEY_ID="AKIAVA3L5BES3NPK225Z"
-#  set AWS_SECRET_ACCESS_KEY="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"
+#  set AWS_ACCESS_KEY_ID="AKIATCKAP56CMEYQN2B5"
+#  set AWS_SECRET_ACCESS_KEY="uH+oMm3kg6lldjwAyYdpwyb60cEcEvtgT05NG2A67Wx"
 #  set AWS_DEFAULT_REGION="us-east-1"
 # $ terraform plan
