@@ -4,20 +4,13 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.16"
     }
-  }
+  } 
 
   required_version = ">= 1.2.0"
 }
 
 provider "aws" {
   # region     = "us-east-1"
-  # secret_key = ""
-  # access_key = ""
-
+  # secret_key = "AWS_SECRET_KEY"
+  # access_key = "AWS_ACCESS_KEY"
 }
-
-
-#  set AWS_ACCESS_KEY_ID=""
-#  set AWS_SECRET_ACCESS_KEY=""
-#  set AWS_DEFAULT_REGION=""
-# $ terraform plan

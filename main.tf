@@ -1,15 +1,15 @@
 resource "aws_s3_bucket" "s3_bucket_1" {
-  bucket = "my-resize-1"
+  bucket = var.first_bucket
 
   tags = {
-    Name = "my-resize-1"
+    Name = var.first_bucket
     # Environment = """
   }
 }
 resource "aws_s3_bucket" "s3_bucket_2" {
-  bucket = "my-resize-2"
+  bucket = var.second_bucket
   tags = {
-    Name = "my-resize-2"
+    Name = var.second_bucket
   }
 }
 resource "aws_iam_policy" "iam_policy_for_lambda" {
@@ -44,7 +44,7 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name               = "lambda_role"
+  name               = "image_resize_lambda_function"
   assume_role_policy = <<EOF
 {
  "Version": "2012-10-17",
